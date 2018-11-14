@@ -33,7 +33,7 @@ npm install node-red-contrib-velux
 # Debug
 This API supported debugging. you have to set the environment variable DEBUG
 ```
-set DEBUG=velux-klf200-api:*,node-red-contrib-velux:*
+set DEBUG=velux-klf200-api:*,velux-klf200:*,node-red-contrib-velux:*
 ```
 ---
 
@@ -82,17 +82,19 @@ If the topic starts with `velux:` this is possible:
 If a topic was specified in the settings and the tropic is not `velux:...` the topic must match or be empty otherwise the input will be discarded
 
 ##### The valuetype
-|valuetype|Access Method name for Standard Parameter|Description|rawValue Range (Hex)|
-| --- | --- | --- |
-|RELATIVE|Relative|Relative value (0 – 100%)|0x0000–0xC800|
-|RELATIVE|Relative|No feed-back value known|0xF7FF|
-|PERCENT_PM|Percent+-|Percentage point plus or minus (-100% – 100%)|0xC900-0xD0D0|
-|TARGET|Target|The target value for the parameter|0xD100|
-|CURRENT|Current|The current value for the parameter|0xD200|
-|DEFAULT|Default|The default value for the parameter|0xD300|
-|IGNORE|Ignore|Ignore the parameter field where this Access Method is written|0xD400|
+<table>
+<th><td>valuetype</td><td>Access Method name for Standard Parameter</td><td>Description</td><td>rawValue Range (Hex)</td></th>
+<tr><td>RELATIVE</td><td>Relative</td><td>Relative value (0 – 100%)</td><td>0x0000–0xC800</td></tr>
+<tr><td>RELATIVE</td><td>Relative</td><td>No feed-back value known</td><td>0xF7FF</td></tr>
+<tr><td>PERCENT_PM</td><td>Percent+-</td><td>Percentage point plus or minus (-100% – 100%)</td><td>0xC900-0xD0D0</td></tr>
+<tr><td>TARGET</td><td>Target</td><td>The target value for the parameter</td><td>0xD100</td></tr>
+<tr><td>CURRENT</td><td>Current</td><td>The current value for the parameter</td><td>0xD200</td></tr>
+<tr><td>DEFAULT</td><td>Default</td><td>The default value for the parameter</td><td>0xD300</td></tr>
+<tr><td>IGNORE</td><td>Ignore</td><td>Ignore the parameter field where this Access Method is written</td><td>0xD400</td></tr>
+</table>
 ## Velux Scene
-comming soon
+coming soon
+
 License (MIT)
 -------------
 Copyright (c) 2018 Chris Traeger
