@@ -1,0 +1,12 @@
+{
+  "velux-connection": {
+      "label": {
+          "host": "Host",
+          "password": "Password"
+      },
+      "placeholder": {
+          "host": "for example: 192.168.2.15",
+          "password": "the WLAN Password"
+      }
+  }
+}

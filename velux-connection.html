@@ -1,0 +1,42 @@
+<script type="text/x-red" data-template-name="velux-connection">
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-globe"></i> <span data-i18n="velux-connection.label.host"></span></label>
+        <input type="text" id="node-config-input-host" data-i18n="[placeholder]velux-connection.placeholder.host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-globe"></i> <span data-i18n="velux-connection.label.password"></span></label>
+        <input type="password" id="node-config-input-password" data-i18n="[placeholder]velux-connection.placeholder.password">
+    </div>
+</script>
+
+<script type="text/javascript">
+    function checkIP(val,len=6) {
+      part=val.split(".");
+      var ok=(part.length==len);
+      for (var i = 0; (i < part.length) && ok; i++) {
+        ok = ok && ((parseInt(part[i])==part[i]) && part[i]>=0 && part[i]<=255)
+      }
+      return ok;
+    }
+    RED.nodes.registerType('velux-connection', {
+        category: 'config',
+        defaults: {
+            host: {
+                value: '',
+                required: true,
+                validate: function(val){ var ok = checkIP(val,4);
+                                         return ok;
+                                       }
+            },
+            password: {
+                value: '',
+                required: true
+            }
+        },
+        label: function() {
+            return "klf200:"+this.host;
+        },
+        oneditprepare: function() {
+        } 
+    });
+</script>

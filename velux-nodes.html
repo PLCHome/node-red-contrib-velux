@@ -1,0 +1,83 @@
+<script type="text/x-red" data-help-name="Velux Nodes">
+    <p>Node for providing the Node state of Velux Devices</p>
+    <p><p>
+</script>
+
+<script type="text/x-red" data-template-name="Velux Nodes">
+    <div class="form-row">
+        <label for="node-input-datasource"><i class="fa fa-random"></i> <span data-i18n="velux-nodes.label.datasource"></span></label>
+        <input type="text" id="node-input-datasource">
+    </div>
+    <div class="form-row">
+        <label for="node-input-index"><i class="fa fa-sign-out"></i> <span data-i18n="velux-nodes.label.index"></span></label>
+        <input type="number" id="node-input-index" list="nodelist" data-i18n="[placeholder]velux-nodes.placeholder.index">
+        <datalist id="nodelist"></datalist>
+    </div> 
+    <div class="form-row">
+      <label for="node-input-nodevalue"><i class="fa fa-code"></i> <span data-i18n="velux-nodes.label.nodevalue"></span></label>
+      <select id="node-input-nodevalue">
+          <option value="ALL" data-i18n="velux-nodes.nodevalue.ALL"></option>
+          <option value="CURRENTPOSITION" data-i18n="velux-nodes.nodevalue.CURRENTPOSITION"></option>
+          <option value="TARGET" data-i18n="velux-nodes.nodevalue.TARGET"></option>
+          <option value="FP1" data-i18n="velux-nodes.nodevalue.FP1"></option>
+          <option value="FP2" data-i18n="velux-nodes.nodevalue.FP2"></option>
+          <option value="FP3" data-i18n="velux-nodes.nodevalue.FP3"></option>
+          <option value="FP4" data-i18n="velux-nodes.nodevalue.FP4"></option>
+      </select>
+    </div> 
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-tasks"></i> <span data-i18n="velux-nodes.label.topic"></span></label>
+        <input type="text" id="node-input-topic" data-i18n="[placeholder]velux-nodes.placeholder.topic">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("Velux Nodes", {
+        category: "Velux KLF 200",
+        color: "#3FADB5",
+        defaults: {
+            name: {
+                name: ""
+            },
+            datasource: {
+                type: "velux-connection",
+                required: true
+            },
+            index: {
+                required: true,  
+                validate:RED.validators.number()
+            },
+            nodevalue: {
+                value: "",
+                required: true
+            },
+            topic: {
+                value: "",
+                required: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "velux.png",
+        label: function () {
+            return this.name || "Velux Nodes";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function() {
+          $.get( '/velux/nodes')
+          .done( function(data) {
+            var nodes = JSON.parse(data);
+            $('#nodelist').append("<option value='-1'>all Nodes</option>");
+            nodes.forEach(function(node){
+              $('#nodelist').append("<option value='"+node.id+"'>"+node.name+"</option>");
+            })
+          })
+        }
+    });
+</script>

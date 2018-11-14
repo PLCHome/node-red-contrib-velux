@@ -1,0 +1,24 @@
+{
+  "velux-nodes": {
+      "label": {
+          "datasource": "Datasource",
+          "topic": "topic",
+          "index": "node index",
+          "nodevalue": "send value"
+      },
+      "placeholder": {
+          "topic": "enter a topic",
+          "index": "enter the node index, empty for all nodes",
+          "nodevalue": "select a value"
+      },
+      "nodevalue": {
+        "ALL": "all values",
+        "CURRENTPOSITION": "currentPosition",
+        "TARGET": "target",
+        "FP1": "fp1CurrentPosition",
+        "FP2": "fp2CurrentPosition",
+        "FP3": "fp3CurrentPosition",
+        "FP4": "fp4CurrentPosition"
+      }
+    }
+}

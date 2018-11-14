@@ -1,0 +1,37 @@
+{
+  "name": "node-red-contrib-velux",
+  "version": "0.0.1",
+  "description": "Provides nodes to talk to Velux® KLF-200 io-homecontrol® Gateway",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.1.0",
+    "velux-klf200": "^0.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChrisHanuta/node-red-contrib-velux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChrisHanuta/node-red-contrib-velux/issues"
+  },
+  "homepage": "https://github.com/ChrisHanuta/node-red-contrib-velux#readme",
+  "keywords": [
+    "node-red",
+    "velux",
+    "klf",
+    "klf200",
+    "klf-200",
+    "io-homecontrol",
+    "gateway",
+    "api"
+  ],
+  "node-red": {
+    "nodes": {
+      "velux-nodes": "velux-nodes.js",
+      "velux-connection": "velux-connection.js"
+    }
+  },
+  "author": {
+    "name": "Chris Traeger"
+  }
+}
