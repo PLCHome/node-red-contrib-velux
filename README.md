@@ -1,6 +1,4 @@
-# Under construction !!!
-
-# velux-klf200-api
+# node-red-contrib-velux
 
 > this is an Node for the API on the Velux&copy; KLF-200 io-homecontrol&copy; Gateway.
 > (klf-200 provided by Velux&copy;. I'm not affiliated.)
