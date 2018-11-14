@@ -48,9 +48,21 @@ It is only possible to reach the KLF200 via a LAN. Some routers do not have a co
 - **Host:** The IP address of the KLF 200
 - **Password:** The password of the KLF200. Normally the WLAN password on the back
 
+### keep alive and startup
+
+After the connection is established, the following actions are performed:
+- The date and time of the real-time clock in the KLF200 are set
+- The system state and the version of the klf200 are queried
+- The node states are queried
+- The house status monitor is turned on
+
+- Every 10 minutes, the system state is queried as a sign of life
+
+
 ## Velux Node
 
 Velux calls all actors in the network nodes. Velux nodes can be Shutter / Rollers, Window opener and so on.
+The output is output from time to time. Coming from the house status monitor. This sends the state of the velux node from time to time. When a status arrives, it is automatically written to the output of the node.
 
 - **Datasource:** The data source is a velux-connection object. There should only be one for a KLF200. The KLF200 only allows two connections.
 - **node index:** This is the index of the device (node) within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
