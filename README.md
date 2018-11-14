@@ -83,7 +83,7 @@ If a topic was specified in the settings and the tropic is not `velux:...` the t
 
 ##### The valuetype
 <table>
-<th><td>valuetype</td><td>Access Method name for Standard Parameter</td><td>Description</td><td>rawValue Range (Hex)</td></th>
+<tr><td>valuetype</td><td>Access Method name for Standard Parameter</td><td>Description</td><td>rawValue Range (Hex)</td></tr>
 <tr><td>RELATIVE</td><td>Relative</td><td>Relative value (0 – 100%)</td><td>0x0000–0xC800</td></tr>
 <tr><td>RELATIVE</td><td>Relative</td><td>No feed-back value known</td><td>0xF7FF</td></tr>
 <tr><td>PERCENT_PM</td><td>Percent+-</td><td>Percentage point plus or minus (-100% – 100%)</td><td>0xC900-0xD0D0</td></tr>
@@ -92,6 +92,7 @@ If a topic was specified in the settings and the tropic is not `velux:...` the t
 <tr><td>DEFAULT</td><td>Default</td><td>The default value for the parameter</td><td>0xD300</td></tr>
 <tr><td>IGNORE</td><td>Ignore</td><td>Ignore the parameter field where this Access Method is written</td><td>0xD400</td></tr>
 </table>
+
 ## Velux Scene
 coming soon
 
