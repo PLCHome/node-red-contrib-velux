@@ -2,7 +2,8 @@
 
 **Enhancements**
 
-- 
+- velux nodes: added remaining time
+- velux api: added
 
 
 **Fixes**

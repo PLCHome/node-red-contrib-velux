@@ -27,8 +27,9 @@
   ],
   "node-red": {
     "nodes": {
+      "velux-connection": "velux-connection.js",
       "velux-nodes": "velux-nodes.js",
-      "velux-connection": "velux-connection.js"
+      "velux-api": "velux-api.js"
     }
   },
   "author": {

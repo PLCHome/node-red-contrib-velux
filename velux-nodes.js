@@ -49,6 +49,8 @@ module.exports = function (RED) {
           } else if (config.nodevalue == 'FP4') {
             msg.payload = data.fp4CurrentPosition.value
             msg.valueType = data.fp4CurrentPosition.valueType
+          } else if (config.nodevalue == 'REMAININGTIME') {
+            msg.payload = data.remainingTime
           } else {
             msg.payload = data
           } 

@@ -1,0 +1,98 @@
+<script type="text/x-red" data-help-name="Velux Api">
+    <p>Node for providing the Node state of Velux Devices</p>
+    <p><p>
+</script>
+
+<script type="text/x-red" data-template-name="Velux Api">
+    <div class="form-row">
+        <label for="node-input-datasource" style="width:25%;"><i class="fa fa-random"></i> <span data-i18n="velux-api.label.datasource"></span></label>
+        <input type="text" id="node-input-datasource" style="width:70%;">
+    </div>
+    <div class="form-row">
+      <label for="node-input-api" style="width:25%;"><i class="fa fa-code"></i> <span data-i18n="velux-api.label.api"></span></label>
+      <select id="node-input-api" style="width:70%;">
+      </select>
+    </div> 
+    <div class="form-row">
+      <label for="node-input-ntf" style="width:25%;vertical-align:top;"><i class="fa fa-code"></i> <span data-i18n="velux-api.label.ntf"></span></label>
+      <select id="node-input-ntf" multiple="multiple" style="width:70%;" >
+      </select>
+    </div> 
+
+    <div class="form-row">
+        <label for="node-input-topic" style="width:25%;"><i class="fa fa-tasks"></i> <span data-i18n="velux-api.label.topic"></span></label>
+        <input type="text" id="node-input-topic" style="width:70%;" data-i18n="[placeholder]velux-api.placeholder.topic">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name" style="width:25%;"><i class="fa fa-tag" ></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" style="width:70%;" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("Velux Api", {
+        category: "Velux KLF 200",
+        color: "#3FADB5",
+        defaults: {
+            name: {
+                name: ""
+            },
+            datasource: {
+                type: "velux-connection",
+                required: true
+            },
+            api: {
+                value: "",
+                required: true
+            },
+            ntf: {
+                value: "",
+                required: false
+            },
+            topic: {
+                value: "",
+                required: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "velux.png",
+        label: function () {
+            return this.name || "Velux Api";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function() {
+          var node = this;
+          $.get( '/velux/req')
+          .done( function(data) {
+            var api = JSON.parse(data);
+            api.forEach(function(api){
+              $('#node-input-api').append("<option value='"+api.id+"'>"+api.name+"</option>");
+            })
+            $("#node-input-api").val(node.api); 
+          })
+          $.get( '/velux/ntf')
+          .done( function(data) {
+            var api = JSON.parse(data);
+            api.forEach(function(api){
+              $('#node-input-ntf').append("<option value='"+api.id+"'>"+api.name+"</option>");
+            })
+            $('#node-input-ntf').val(node.ntf);
+          })
+          
+          //$('#node-input-ntf option').filter(function() {
+           // return (node.ntf||[]).indexOf($(this).val()) > -1; //Options text exists in array
+          //((}).prop('selected', true);
+          //$.each(this.ntf, function(i,v){
+          //  $("#node-input-ntf option[value='" + v + "']").prop("selected", true);
+          //});
+          
+        },
+        oneditsave: function() {
+          var node = this;
+          node.ntf=$('#node-input-ntf').val();
+        }         
+    });
+</script>

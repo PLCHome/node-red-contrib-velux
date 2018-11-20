@@ -13,12 +13,13 @@
       },
       "nodevalue": {
         "ALL": "all values",
-        "CURRENTPOSITION": "currentPosition",
+        "CURRENTPOSITION": "current position",
         "TARGET": "target",
-        "FP1": "fp1CurrentPosition",
-        "FP2": "fp2CurrentPosition",
-        "FP3": "fp3CurrentPosition",
-        "FP4": "fp4CurrentPosition"
+        "FP1": "fp1 current position",
+        "FP2": "fp2 current position",
+        "FP3": "fp3 current position",
+        "FP4": "fp4 current position",
+        "REMAININGTIME": "remaining time"
       }
     }
 }

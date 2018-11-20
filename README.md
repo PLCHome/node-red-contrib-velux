@@ -71,6 +71,7 @@ The output is output from time to time. Coming from the house status monitor. Th
  - *currentPosition*: only the current position is output.
  - *target*: The target position is output.
  - *fp1CurrentPosition (-4)*: Some devices (nodes) have further function parameters. this is explained in the velux API description.
+ - *remaining time*: The remaining time to position.
 - **topic:** This node sends a topic, either this text or the velux node name. and see input
 - **name:** The name is displayed on the node
 
@@ -107,6 +108,19 @@ If a topic was specified in the settings and the tropic is not `velux:...` the t
 
 ## Velux Scene
 coming soon
+
+## Velux API
+
+The direct route to the velux API. You can send commands or receive notifications.
+
+- **Datasource:** The data source is a velux-connection object. There should only be one for a KLF200. The KLF200 only allows two connections.
+- **node index:** This is the index of the device (node) within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
+- **API:** The api command to send. The payload must be an Object. Maybe you must add some parameters. Take a look at the [technical specification for klf 200 api.pdf](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf). Also take an look at the [API source](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/lib/klf.js). The parameters starts with a small bush letter. You can override the selected api with an payload.api or an payload.apiText parameter.
+- **listen NTF:** The api notification to listen. You can choose from everything to nothing.
+- **topic:** This node checks a topic. If the topic is entered the topic must match. 
+- **name:** The name is displayed on the node
+
+
 
 License (MIT)
 -------------

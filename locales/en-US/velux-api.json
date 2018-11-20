@@ -1,0 +1,15 @@
+{
+  "velux-api": {
+      "label": {
+          "datasource": "Datasource",
+          "topic": "topic",
+          "api": "API",
+          "ntf": "listen NTF"
+      },
+      "placeholder": {
+          "topic": "enter a topic",
+          "api": "select an API",
+          "ntf": "select one or more NTF"
+      }
+    }
+}
