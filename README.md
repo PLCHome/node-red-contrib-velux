@@ -9,10 +9,10 @@ It works only with the version 0.2.0.0.71 and above.
 
 Up to the version 0.1.1.0.45 it was possible to access the KLF-200 web interface and rest API via the LAN interface. This does not work in version 0.2.0.0.71 anymore. Velux shared on demand with the Lan interface can only be addressed via the API.
 
-Take a look at the [technical specification for klf 200 api.pdf](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf)
+Take a look at the [technical specification for klf 200 api.pdf](https://github.com/PLCHome/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf)
 
 
-For the latest updates see the [CHANGELOG.md](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/CHANGELOG.md)
+For the latest updates see the [CHANGELOG.md](https://github.com/PLCHome/velux-klf200-api/blob/master/CHANGELOG.md)
 
 # Install
 ```sh
@@ -115,7 +115,7 @@ The direct route to the velux API. You can send commands or receive notification
 
 - **Datasource:** The data source is a velux-connection object. There should only be one for a KLF200. The KLF200 only allows two connections.
 - **node index:** This is the index of the device (node) within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
-- **API:** The api command to send. The payload must be an Object. Maybe you must add some parameters. Take a look at the [technical specification for klf 200 api.pdf](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf). Also take an look at the [API source](https://github.com/ChrisHanuta/velux-klf200-api/blob/master/lib/klf.js). The parameters starts with a small bush letter. You can override the selected api with an payload.api or an payload.apiText parameter.
+- **API:** The api command to send. The payload must be an Object. Maybe you must add some parameters. Take a look at the [technical specification for klf 200 api.pdf](https://github.com/PLCHome/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf). Also take an look at the [API source](https://github.com/PLCHome/velux-klf200-api/blob/master/lib/klf.js). The parameters starts with a small bush letter. You can override the selected api with an payload.api or an payload.apiText parameter.
 - **listen NTF:** The api notification to listen. You can choose from everything to nothing.
 - **topic:** This node checks a topic. If the topic is entered the topic must match. 
 - **name:** The name is displayed on the node

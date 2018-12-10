@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChrisHanuta/node-red-contrib-velux.git"
+    "url": "https://github.com/PLCHome/node-red-contrib-velux.git"
   },
   "bugs": {
-    "url": "https://github.com/ChrisHanuta/node-red-contrib-velux/issues"
+    "url": "https://github.com/PLCHome/node-red-contrib-velux/issues"
   },
-  "homepage": "https://github.com/ChrisHanuta/node-red-contrib-velux#readme",
+  "homepage": "https://github.com/PLCHome/node-red-contrib-velux#readme",
   "keywords": [
     "node-red",
     "velux",
