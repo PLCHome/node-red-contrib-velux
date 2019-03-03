@@ -1,0 +1,20 @@
+{
+  "velux-scenes": {
+      "label": {
+          "datasource": "Datasource",
+          "topic": "topic",
+          "index": "szene index",
+          "velocity": "velocity"
+      },
+      "placeholder": {
+          "topic": "enter a topic",
+          "index": "enter the scene index",
+          "velocity": "the node operates by"
+      },
+      "velocity": {
+        "DEFAULT": "Default velocity",
+        "SILENT": "Silent mode (slow)",
+        "FAST": "Fast velocity"
+      }
+    }
+}

@@ -28,7 +28,7 @@ module.exports = function (RED) {
           if (node.hasTopic) {
             msg.topic = config.topic
           } else {
-            msg.topic = data.nodeName
+            msg.topic = node.name
           }
 
           if (config.nodevalue == 'CURRENTPOSITION') {
@@ -62,7 +62,7 @@ module.exports = function (RED) {
       node.on("input", function(msg) {
         debug('input:','msg',msg)
         
-        if (typeof msg.topic === 'string') {
+        if (typeof msg.topic === 'string' && msg.topic !== '') {
           if (node.hasTopic && msg.topic == (config.topic||'')){
             node.veluxDatasource.nodeSendValue(node.getID(),msg.payload)
             return

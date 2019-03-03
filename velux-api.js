@@ -36,16 +36,18 @@ module.exports = function (RED) {
       })
       
       node.onNTF = function(data) {
-        debug('apiNTF:',config.ntf.indexOf(data.api),data)
-        config.ntf.map((ntf)=>{
-          if (ntf == data.api) {
-            var outmsg = {payload : data}
-            if (node.hasTopic) {
-              outmsg.topic = config.topic
+        if (config.ntf) {
+          debug('apiNTF:',config.ntf.indexOf(data.api),data)
+          config.ntf.map((ntf)=>{
+            if (ntf == data.api) {
+              var outmsg = {payload : data}
+              if (node.hasTopic) {
+                outmsg.topic = config.topic
+              }
+              node.send(outmsg)
             }
-            node.send(outmsg)
-          }
-        })
+          })
+        }
       }
       
       node.on('close', function (done) {

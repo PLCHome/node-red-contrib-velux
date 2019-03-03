@@ -107,7 +107,36 @@ If a topic was specified in the settings and the tropic is not `velux:...` the t
 </table>
 
 ## Velux Scene
-coming soon
+manages scenes and starts them. a scene is a sequence of commands stored in KLF.
+
+- **Datasource:** The data source is a velux-connection object. There should only be one for a KLF200. The KLF200 only allows two connections.
+- **scene index:** This is the index of the scene within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
+- **velocity:** This value is sent when a new value is received
+  - *DEFAULT*: The scene operates by its default velocity.'
+  - *SILENT*: The scene operates in silent mode (slow).'
+  - *FAST*: The scene operates with fast velocity.'
+- **topic:** This node sends a topic, either this text or the velux node name. and see input
+- **name:** The name is displayed on the node
+
+###### The Input
+The msg.payload is ignored by the node.
+
+The msg.topic can control what happens to the input.
+
+If the topic starts with `velux:` this is possible:
+- `velux` Like setting, see above, the scene is started at the KLF200
+- `velux:id:<id>` scene id for execute. The settings are ignored.
+- `velux:name:<name>` scene name for execute. The settings are ignored.
+- `velux[:id:<id>|:name:<name>]:velocityid:<name>` velocity by name for the scene. The settings are ignored.
+  - *DEFAULT*: The scene operates by its default velocity.'
+  - *SILENT*: The scene operates in silent mode (slow).'
+  - *FAST*: The scene operates with fast velocity.'
+- `velux[:id:<id>|:name:<name>]:velocity:<id>` velocity by id for the scene. The settings are ignored.
+  - *0*: The scene operates by its default velocity.'
+  - *1*: The scene operates in silent mode (slow).'
+  - *2*: The scene operates with fast velocity.'
+
+If a topic was specified in the settings and the tropic is not `velux:...` the topic must match or be empty otherwise the input will be discarded
 
 ## Velux API
 
@@ -117,7 +146,7 @@ The direct route to the velux API. You can send commands or receive notification
 - **node index:** This is the index of the device (node) within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
 - **API:** The api command to send. The payload must be an Object. Maybe you must add some parameters. Take a look at the [technical specification for klf 200 api.pdf](https://github.com/PLCHome/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf). Also take an look at the [API source](https://github.com/PLCHome/velux-klf200-api/blob/master/lib/klf.js). The parameters starts with a small bush letter. You can override the selected api with an payload.api or an payload.apiText parameter.
 - **listen NTF:** The api notification to listen. You can choose from everything to nothing.
-- **topic:** This node checks a topic. If the topic is entered the topic must match. 
+- **topic:** This node checks a topic. If the topic is entered the topic must match.
 - **name:** The name is displayed on the node
 
 

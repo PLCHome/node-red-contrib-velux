@@ -27,9 +27,11 @@ module.exports = function (RED) {
       node.velux.event.on('nodeUpdate',node.nodeUpdate)
       node.velux.event.on('nodeStatus',node.nodeStatus)
       node.velux.event.on('NTF',node.apiNTF)
+      node.velux.event.on('GW_COMMAND_REMAINING_TIME_NTF',node.sceneRemainingTime)
+      node.velux.event.on('GW_COMMAND_RUN_STATUS_NTF',node.sceneRunStatus)
+      node.velux.event.on('GW_SESSION_FINISHED_NTF',node.sceneSessionFinished)
       node.nodeUpdateAll()
     }
-   
         
     /* connect to KLF200 */
     function connect() {
@@ -286,6 +288,94 @@ module.exports = function (RED) {
       }
     }
     /* velux nodes */
+    
+    /* velux scenes */
+    RED.httpAdmin.get('/velux/scenes', function (req, res, next) {
+      debug('/velux/scenes:')
+      var scenes = []
+      if (node.velux) {
+        node.velux.scenes.getIDs().map((id)=>{
+          var s = node.velux.scenes.scene[id]
+          scenes.push({id:s.sceneID, name:s.sceneName})
+        })
+      }
+      //scenes.sort(function(a, b){return b.order-a.order});
+      var json = JSON.stringify(scenes)
+      debug('/velux/scenes:',json)
+      res.end(json)
+    })    
+    
+    var sessionIDs = {}
+    
+    node.addSessionID = function (id,n) {
+      debug('addSessionID:',id,(!(!n)))
+      sessionIDs[id] = n
+    }
+
+    node.getNodeBySessionID = function (id) {
+      debug('getNodeBySessionID:',id,(!(!sessionIDs[id])))
+      return sessionIDs[id]
+    }
+
+    node.delSessionID = function (id) {
+      debug('delSessionID:',id,(!(!sessionIDs[id])))
+      delete sessionIDs[id]
+    }
+
+    node.getSceneByName = function (name) {
+      debug('getSceneByName:')
+      if (node.velux) {
+        return node.velux.scenes.getIdByName(name)
+      }
+    }
+    
+    node.runScene = function (n,id,velocity){
+      debug('runScene:')
+      if (node.velux) {
+        return new Promise((resolve, reject)=>{
+          node.velux.scenes.runScene(id,velocity)
+          .then((data)=>{
+            node.addSessionID(data.sessionID,n)
+            resolve(data)
+           })
+          .catch((err)=>{reject(err)})
+        })
+      }
+    }
+
+    node.sceneRemainingTime = function (data) {
+      debug('sceneRemainingTime:',data)
+      var n = node.getNodeBySessionID(data.sessionID)
+      if (n) {
+        n.publish(data)
+      }
+    }
+    
+    node.sceneRunStatus = function (data) {
+      debug('sceneRunStatus:',data)
+      var n = node.getNodeBySessionID(data.sessionID)
+      if (n) {
+        n.publish(data)
+      }
+    }
+    
+    node.sceneSessionFinished = function (data) {
+      debug('sceneSessionFinished:',data)
+      if (node.getNodeBySessionID(data.sessionID)) {
+        var n = node.getNodeBySessionID(data.sessionID)
+        node.delSessionID(data.sessionID)
+        n.publish(data)
+      }
+    }
+    
+    node.getVelocityTagByName = function (name) {
+      debug('getVelocityTagByName:',name)
+      if (node.velux) {
+        return node.velux.scenes.getVelocityTagByName(name)
+      }
+    }
+    
+    /* velux scenes */
     
     connect()
   }

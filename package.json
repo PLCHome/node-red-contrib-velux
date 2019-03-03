@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^4.1.0",
-    "velux-klf200": "^0.0.2"
+    "velux-klf200": "^0.0.3"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "nodes": {
       "velux-connection": "velux-connection.js",
       "velux-nodes": "velux-nodes.js",
-      "velux-api": "velux-api.js"
+      "velux-api": "velux-api.js",
+      "velux-scenes": "velux-scenes.js"
     }
   },
   "author": {

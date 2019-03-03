@@ -1,33 +1,29 @@
-<script type="text/x-red" data-help-name="Velux Nodes">
+<script type="text/x-red" data-help-name="Velux Scenes">
     <p>Node for providing the Node state of Velux Devices</p>
     <p><p>
 </script>
 
-<script type="text/x-red" data-template-name="Velux Nodes">
+<script type="text/x-red" data-template-name="Velux Scenes">
     <div class="form-row">
-        <label for="node-input-datasource"><i class="fa fa-random"></i> <span data-i18n="velux-nodes.label.datasource"></span></label>
+        <label for="node-input-datasource"><i class="fa fa-random"></i> <span data-i18n="velux-scenes.label.datasource"></span></label>
         <input type="text" id="node-input-datasource">
     </div>
     <div class="form-row">
-        <label for="node-input-index"><i class="fa fa-sign-out"></i> <span data-i18n="velux-nodes.label.index"></span></label>
-        <input type="number" id="node-input-index" list="nodelist" data-i18n="[placeholder]velux-nodes.placeholder.index">
-        <datalist id="nodelist"></datalist>
+        <label for="node-input-index"><i class="fa fa-sign-out"></i> <span data-i18n="velux-scenes.label.index"></span></label>
+        <input type="number" id="node-input-index" list="scenelist" data-i18n="[placeholder]velux-scenes.placeholder.index">
+        <datalist id="scenelist"></datalist>
     </div> 
     <div class="form-row">
-      <label for="node-input-nodevalue"><i class="fa fa-code"></i> <span data-i18n="velux-nodes.label.nodevalue"></span></label>
-      <select id="node-input-nodevalue">
-          <option value="ALL" data-i18n="velux-nodes.nodevalue.ALL"></option>
-          <option value="CURRENTPOSITION" data-i18n="velux-nodes.nodevalue.CURRENTPOSITION"></option>
-          <option value="TARGET" data-i18n="velux-nodes.nodevalue.TARGET"></option>
-          <option value="FP1" data-i18n="velux-nodes.nodevalue.FP1"></option>
-          <option value="FP2" data-i18n="velux-nodes.nodevalue.FP2"></option>
-          <option value="FP3" data-i18n="velux-nodes.nodevalue.FP3"></option>
-          <option value="FP4" data-i18n="velux-nodes.nodevalue.FP4"></option>
+      <label for="node-input-velocity"><i class="fa fa-code"></i> <span data-i18n="velux-scenes.label.velocity"></span></label>
+      <select id="node-input-velocity">
+          <option value="DEFAULT" data-i18n="velux-scenes.velocity.DEFAULT"></option>
+          <option value="SILENT" data-i18n="velux-scenes.velocity.SILENT"></option>
+          <option value="FAST" data-i18n="velux-scenes.velocity.FAST"></option>
       </select>
     </div> 
     <div class="form-row">
-        <label for="node-input-topic"><i class="fa fa-tasks"></i> <span data-i18n="velux-nodes.label.topic"></span></label>
-        <input type="text" id="node-input-topic" data-i18n="[placeholder]velux-nodes.placeholder.topic">
+        <label for="node-input-topic"><i class="fa fa-tasks"></i> <span data-i18n="velux-scenes.label.topic"></span></label>
+        <input type="text" id="node-input-topic" data-i18n="[placeholder]velux-scenes.placeholder.topic">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
@@ -36,7 +32,7 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType("Velux Nodes", {
+    RED.nodes.registerType("Velux Scenes", {
         category: "Velux KLF 200",
         color: "#3FADB5",
         defaults: {
@@ -51,8 +47,8 @@
                 required: true,  
                 validate:RED.validators.number()
             },
-            nodevalue: {
-                value: "",
+            velocity: {
+                value: "DEFAULT",
                 required: true
             },
             topic: {
@@ -64,18 +60,17 @@
         outputs: 1,
         icon: "velux.png",
         label: function () {
-            return this.name || "Velux Nodes";
+            return this.name || "Velux Scenes";
         },
         labelStyle: function () {
             return this.name ? "node_label_italic" : "";
         },
         oneditprepare: function() {
-          $.get( '/velux/nodes')
+          $.get( '/velux/scenes')
           .done( function(data) {
-            var nodes = JSON.parse(data);
-            $('#nodelist').append("<option value='-1'>all Nodes</option>");
-            nodes.forEach(function(node){
-              $('#nodelist').append("<option value='"+node.id+"'>"+node.name+"</option>");
+            var scenes = JSON.parse(data);
+            scenes.forEach(function(scenes){
+              $('#scenelist').append("<option value='"+scenes.id+"'>"+scenes.name+"</option>");
             })
           })
         }

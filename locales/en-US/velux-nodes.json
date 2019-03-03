@@ -8,7 +8,7 @@
       },
       "placeholder": {
           "topic": "enter a topic",
-          "index": "enter the node index, empty for all nodes",
+          "index": "enter the node index, -1 for all nodes",
           "nodevalue": "select a value"
       },
       "nodevalue": {
