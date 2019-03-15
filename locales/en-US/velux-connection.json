@@ -2,11 +2,21 @@
   "velux-connection": {
       "label": {
           "host": "Host",
-          "password": "Password"
+          "password": "Password",
+          "monitor": "Monitoring"
       },
       "placeholder": {
           "host": "for example: 192.168.2.15",
-          "password": "the WLAN Password"
-      }
+          "password": "the WLAN Password",
+          "monitor": "please select the monitoring method"
+      },
+      "monitor": {
+        "MONITOR" : "use home monitor",
+        "POLL10000" : "poll every 10sec",
+        "POLL30000" : "poll every 30sec",
+        "POLL60000" : "poll every min",
+        "POLL300000" : "poll every 5min",
+        "POLL600000" : "poll every 10min"
+      } 
   }
 }

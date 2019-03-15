@@ -7,6 +7,14 @@ module.exports = function (RED) {
   function veluxConnectionNode(config) {
     RED.nodes.createNode(this, config)
     var node = this
+    node.houseStatusMonitorEnable = false
+    config.monitor = config.monitor||''
+    if (config.monitor == "POLL10000") {node.houseStatusAlternative = 10000}
+    else if (config.monitor == "POLL30000") {node.houseStatusAlternative = 30000}
+    else if (config.monitor == "POLL60000") {node.houseStatusAlternative = 60000}
+    else if (config.monitor == "POLL300000") {node.houseStatusAlternative = 300000}
+    else if (config.monitor == "POLL600000") {node.houseStatusAlternative = 600000}
+    else node.houseStatusMonitorEnable = true
     debug('config:',config)
     
     function restart() {
@@ -17,8 +25,23 @@ module.exports = function (RED) {
       },5000)
     }
     
+    function cleanup() {
+      debug('cleanup:',(typeof node.velux !== "undefined"))
+      if (typeof node.velux !== "undefined") {
+        node.velux.event.removeListener('end',restart)
+        node.velux.event.removeListener('nodeUpdate',node.nodeUpdate)
+        node.velux.event.removeListener('nodeStatus',node.nodeStatus)
+        node.velux.event.removeListener('NTF',node.apiNTF)
+        node.velux.event.removeListener('GW_COMMAND_REMAINING_TIME_NTF',node.sceneRemainingTime)
+        node.velux.event.removeListener('GW_COMMAND_RUN_STATUS_NTF',node.sceneRunStatus)
+        node.velux.event.removeListener('GW_SESSION_FINISHED_NTF',node.sceneSessionFinished)
+        delete (node.velux)
+      }
+    }
+    
     function connected(v) {
       debug('connected:')
+      cleanup()
       node.velux = v
       node.velux.event.on('error',(err)=>{
         node.error(util.format('Velux %s', err))
@@ -37,7 +60,10 @@ module.exports = function (RED) {
     function connect() {
       debug('connect:')
       clearTimeout(node.restartTimer)
-      klf.getVelux(config.host,config.password,{})
+      klf.getVelux(config.host,config.password,{
+        "houseStatusAlternative" : node.houseStatusAlternative,
+        "houseStatusMonitorEnable" : node.houseStatusMonitorEnable
+      })
       .then(connected)
       .catch((err)=>{
         node.error(util.format('Velux %s', err))
@@ -52,9 +78,11 @@ module.exports = function (RED) {
       if (node.velux) {
         node.velux.end().catch((err)=>{
           node.error(util.format('Velux %s', err))
+          cleanup()
           done()
         }).then(()=>{
           clearTimeout(node.restartTimer)
+          cleanup()
           done()
         })
       }

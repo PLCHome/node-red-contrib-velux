@@ -47,6 +47,7 @@ It is only possible to reach the KLF200 via a LAN. Some routers do not have a co
 
 - **Host:** The IP address of the KLF 200
 - **Password:** The password of the KLF200. Normally the WLAN password on the back
+- **Monitoring:** Sets the monitoring method. At home monitor, the KLF200 sends automatically. The KLF200 in versio 0.2.0.0.71 can crash on a broken ip connection and deny any login until reset. Therefore you can also choose polling.
 
 ### keep alive and startup
 
