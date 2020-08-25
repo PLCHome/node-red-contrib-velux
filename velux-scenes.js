@@ -27,13 +27,12 @@ module.exports = function (RED) {
       
       var timer = null
       node.runTimer = function(seconds){
-        clearTimeout(timer)
-        var s = seconds
+        clearInterval(timer)
         timer = setInterval(()=>{
           //n.status({fill:fillSystem,shape:shapeSystem,text:textSystem})
           node.status({text:""+--seconds+"sec"})
           if (seconds<1) {
-            clearTimeout(timer)
+            clearInterval(timer)
           }
         },1000)
       }
@@ -45,7 +44,7 @@ module.exports = function (RED) {
             node.runTimer(data.seconds)
           }
           if (data.apiText === "GW_COMMAND_RUN_STATUS_NTF") {
-            clearTimeout(timer)
+            clearInterval(timer)
             node.status({text:data.runStatusText})
           }
           var msg={}

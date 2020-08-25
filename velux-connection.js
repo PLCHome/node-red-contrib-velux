@@ -7,14 +7,8 @@ module.exports = function (RED) {
   function veluxConnectionNode(config) {
     RED.nodes.createNode(this, config)
     var node = this
-    node.houseStatusMonitorEnable = false
     config.monitor = config.monitor||''
-    if (config.monitor == "POLL10000") {node.houseStatusAlternative = 10000}
-    else if (config.monitor == "POLL30000") {node.houseStatusAlternative = 30000}
-    else if (config.monitor == "POLL60000") {node.houseStatusAlternative = 60000}
-    else if (config.monitor == "POLL300000") {node.houseStatusAlternative = 300000}
-    else if (config.monitor == "POLL600000") {node.houseStatusAlternative = 600000}
-    else node.houseStatusMonitorEnable = true
+    node.houseStatusMonitorEnable = (config.monitor == "MONITOR")
     debug('config:',config)
     
     function restart() {
@@ -61,7 +55,6 @@ module.exports = function (RED) {
       debug('connect:')
       clearTimeout(node.restartTimer)
       klf.getVelux(config.host,config.password,{
-        "houseStatusAlternative" : node.houseStatusAlternative,
         "houseStatusMonitorEnable" : node.houseStatusMonitorEnable
       })
       .then(connected)

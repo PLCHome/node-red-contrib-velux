@@ -12,11 +12,7 @@
       },
       "monitor": {
         "MONITOR" : "use home monitor",
-        "POLL10000" : "poll every 10sec",
-        "POLL30000" : "poll every 30sec",
-        "POLL60000" : "poll every min",
-        "POLL300000" : "poll every 5min",
-        "POLL600000" : "poll every 10min"
+        "NOMONITOR" : "no data from KLF"
       } 
   }
 }

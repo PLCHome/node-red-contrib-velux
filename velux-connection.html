@@ -11,21 +11,17 @@
       <label for="node-config-input-monitor"><i class="fa fa-code"></i> <span data-i18n="velux-connection.label.monitor"></span></label>
       <select id="node-config-input-monitor">
           <option value="MONITOR" data-i18n="velux-connection.monitor.MONITOR"></option>
-          <option value="POLL10000" data-i18n="velux-connection.monitor.POLL10000"></option>
-          <option value="POLL30000" data-i18n="velux-connection.monitor.POLL30000"></option>
-          <option value="POLL60000" data-i18n="velux-connection.monitor.POLL60000"></option>
-          <option value="POLL300000" data-i18n="velux-connection.monitor.POLL300000"></option>
-          <option value="POLL600000" data-i18n="velux-connection.monitor.POLL600000"></option>
+          <option value="NOMONITOR" data-i18n="velux-connection.monitor.NOMONITOR"></option>
       </select>
     </div> 
 </script>
 
 <script type="text/javascript">
     function checkIP(val,len=6) {
-      part=val.split(".");
+      var part=val.split(".");
       var ok=(part.length==len);
       for (var i = 0; (i < part.length) && ok; i++) {
-        ok = ok && ((parseInt(part[i])==part[i]) && part[i]>=0 && part[i]<=255)
+        ok = ((parseInt(part[i])==part[i]) && part[i]>=0 && part[i]<=255) && ok
       }
       return ok;
     }
@@ -54,6 +50,9 @@
         oneditprepare: function() {
           if (this.monitor === undefined) {
             $("#node-config-input-monitor").val("MONITOR");
+          }         
+          if (!$("#node-config-input-monitor").val()) {
+            $("#node-config-input-monitor").val("NOMONITOR");
           }         
         } 
     });

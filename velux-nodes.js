@@ -1,6 +1,6 @@
 module.exports = function (RED) {
   'use strict'
-  var util = require('util')
+  //var util = require('util')
   var debug = require('debug')('node-red-contrib-velux:velux-nodes')
 
   function veluxNodes(config) {
