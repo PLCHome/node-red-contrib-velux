@@ -24,6 +24,26 @@ npm install node-red-contrib-velux
 ### Currently tested with API 3.14 from 01.10.2018 version 0.2.0.0.71
 ---
 
+## Current problems
+
+GW_NODE_STATE_POSITION_CHANGED_NTF contains an incorrect timestamp. The lowest 2 bytes of the 4 bytes are sent to the higher 2 bytes and the lowest 2 bytes are 0.
+In response to the "GW_GET_ALL_NODES_INFORMATION_REQ" command, the correct time stamp is sent:
+5be8d806 - 2018-11-12T01: 31: 50.000Z
+15 sec Later a "GW_NODE_STATE_POSITION_CHANGED_NTF" hits. This contains a timestamp:
+d8160000 
+correct was here 5be8d816
+
+If there is no communication with the KLF every 10 minutes to 15 minutes, the connection will be disconnected as described in the manual.
+If this happens when the home monitor "GW_HOUSE_STATUS_MONITOR_ENABLE_REQ" is activated, the KLF200 is no longer reachable. 
+The KLF200 no longer sends the TLS command "Change Cipher Spec." on TLS start.
+This means that TLS encryption can no longer be initiated.
+I saw these in the wireshark.
+Should anyone else notice this error, it would be nice if that this someone also reports to the VELUX hotline.
+
+The KLF200 needs more than 3 seconds to connect. It needs more then a second to send the key and more then a second for the TLS command "Change Cipher Spec.".
+
+---
+
 ### The connect password is the WLAN-Password not the web config password
 ---
 
@@ -144,7 +164,6 @@ If a topic was specified in the settings and the tropic is not `velux:...` the t
 The direct route to the velux API. You can send commands or receive notifications.
 
 - **Datasource:** The data source is a velux-connection object. There should only be one for a KLF200. The KLF200 only allows two connections.
-- **node index:** This is the index of the device (node) within the KLF200. In the dropdown, the index and the name are displayed when the combo box is empty.
 - **API:** The api command to send. The payload must be an Object. Maybe you must add some parameters. Take a look at the [technical specification for klf 200 api.pdf](https://github.com/PLCHome/velux-klf200-api/blob/master/technical%20specification%20for%20klf%20200%20api.pdf). Also take an look at the [API source](https://github.com/PLCHome/velux-klf200-api/blob/master/lib/klf.js). The parameters starts with a small bush letter. You can override the selected api with an payload.api or an payload.apiText parameter.
 - **listen NTF:** The api notification to listen. You can choose from everything to nothing.
 - **topic:** This node checks a topic. If the topic is entered the topic must match.

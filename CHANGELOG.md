@@ -2,6 +2,18 @@
 
 **Fixes**
 
+- readme edited
+
+**Fixes**
+
+- removed: polling instead of House status monitor. Because it does not provide an answer
+- fixed some issues from LGTM.com
+
+
+### 0.0.4: Maintenance Release
+
+**Fixes**
+
 - removed: polling instead of House status monitor. Because it does not provide an answer
 - fixed some issues from LGTM.com
 
