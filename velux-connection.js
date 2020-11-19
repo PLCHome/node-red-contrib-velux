@@ -1,8 +1,9 @@
+'use strict'
+var klf = require('velux-klf200')
+var util = require('util')
+var debug = require('debug')('node-red-contrib-velux:veluxConnectionNode')
+
 module.exports = function (RED) {
-  'use strict'
-  var klf = require('velux-klf200')
-  var util = require('util')
-  var debug = require('debug')('node-red-contrib-velux:veluxConnectionNode')
 
   function veluxConnectionNode(config) {
     RED.nodes.createNode(this, config)
