@@ -42,6 +42,11 @@ Should anyone else notice this error, it would be nice if that this someone also
 
 The KLF200 needs more than 3 seconds to connect. It needs more then a second to send the key and more then a second for the TLS command "Change Cipher Spec.".
 
+The KLF sometimes does not release the Sessin internally if the connection is lost. 
+Since only 2 users are allowed to connect, it can happen that you are no longer allowed to connect to the KLF.
+Currently I am sending a GW_REBOOT_REQ from the API from the Node-Red once a day. 
+This ensures that there is always a free slot available for connection.
+
 ---
 
 ### The connect password is the WLAN-Password not the web config password

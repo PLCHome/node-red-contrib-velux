@@ -1,3 +1,14 @@
+### 0.0.7: Maintenance Release
+
+**Enhancements**
+
+-- Readme: Current problems
+
+**Fixes**
+
+-- Try to connect to a KLF without any scene. It will reject with "Can't get scene list".
+
+
 ### 0.0.6: Maintenance Release
 
 **Fixes**
@@ -5,6 +16,7 @@
 - API (KLF) not longer in the connection class, now it is global
 - New API with CERT CA
 - API 3.18
+
 
 ### 0.0.5: Maintenance Release
 
