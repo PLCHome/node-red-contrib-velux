@@ -151,13 +151,13 @@ The msg.topic can control what happens to the input.
 
 If the topic starts with `velux:` this is possible:
 - `velux` Like setting, see above, the scene is started at the KLF200
-- `velux:id:<id>` scene id for execute. The settings are ignored.
-- `velux:name:<name>` scene name for execute. The settings are ignored.
-- `velux[:id:<id>|:name:<name>]:velocityid:<name>` velocity by name for the scene. The settings are ignored.
+- `velux:execute:id:<id>` scene id for execute. The settings are ignored.
+- `velux:execute:name:<name>` scene name for execute. The settings are ignored.
+- `velux:execute:[:id:<id>|:name:<name>]:velocity:<name>` velocity by name for the scene. The settings are ignored.
   - *DEFAULT*: The scene operates by its default velocity.'
   - *SILENT*: The scene operates in silent mode (slow).'
   - *FAST*: The scene operates with fast velocity.'
-- `velux[:id:<id>|:name:<name>]:velocity:<id>` velocity by id for the scene. The settings are ignored.
+- `veluxexecute:[:id:<id>|:name:<name>]:velocityid:<id>` velocity by id for the scene. The settings are ignored.
   - *0*: The scene operates by its default velocity.'
   - *1*: The scene operates in silent mode (slow).'
   - *2*: The scene operates with fast velocity.'
